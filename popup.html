@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400">
+  <title>XT-Kryptos</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HEADER -->
+    <!-- ═══════════════════════════════════════════ -->
+    <header>
+      <div class="header-brand">
+        <svg class="header-logo" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          <circle cx="12" cy="16" r="1" fill="currentColor" stroke="none"/>
+          <line x1="12" y1="17" x2="12" y2="19"/>
+        </svg>
+        <div>
+          <h1 class="header-title">XT-KRYPTOS</h1>
+          <span class="header-sub">Ghost Session Protocol</span>
+        </div>
+      </div>
+      <div class="status-badge" id="statusBadge" role="status" aria-live="polite">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-label" id="statusLabel">—</span>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CONTENT -->
+    <!-- ═══════════════════════════════════════════ -->
+    <main>
+
+      <!-- LOADING -->
+      <section id="viewLoading" class="view active">
+        <div class="loader-wrap">
+          <div class="loader"></div>
+          <p class="loader-text">Resolving vault state…</p>
+        </div>
+      </section>
+
+      <!-- ─────── FACE 1: EMPTY ─────── -->
+      <section id="viewEmpty" class="view">
+        <div class="card card-info">
+          <svg class="card-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p>No cookie is currently protected. Log into Roblox, then lock your session here.</p>
+        </div>
+
+        <div class="field">
+          <label for="pwLock">Password</label>
+          <div class="field-input-wrap">
+            <input type="password" id="pwLock" placeholder="Choose a vault password" autocomplete="off" spellcheck="false" aria-label="Password for locking">
+            <button class="field-eye" data-target="pwLock" type="button" aria-label="Toggle visibility">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="strength-track"><div class="strength-fill" id="strengthFill"></div></div>
+          <span class="strength-text" id="strengthText"></span>
+        </div>
+
+        <button class="btn btn-primary btn-lock" id="btnLock">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          LOCK SESSION
+        </button>
+      </section>
+
+      <!-- ─────── FACE 2: LOCKED ─────── -->
+      <section id="viewLocked" class="view">
+        <div class="card card-locked">
+          <div class="card-row">
+            <span class="card-dim">Sealed since</span>
+            <span class="card-val card-val--red mono" id="dispLockedAt">—</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pwUnlock">Password</label>
+          <div class="field-input-wrap">
+            <input type="password" id="pwUnlock" placeholder="Enter vault password" autocomplete="off" spellcheck="false" aria-label="Password for unlocking">
+            <button class="field-eye" data-target="pwUnlock" type="button" aria-label="Toggle visibility">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-unlock" id="btnUnlock">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+          UNLOCK (GHOST)
+        </button>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost btn-sm" id="btnPeek">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            PEEK
+          </button>
+          <button class="btn btn-ghost btn-sm btn-danger-ghost" id="btnWipe">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            WIPE
+          </button>
+        </div>
+      </section>
+
+      <!-- ─────── FACE 3: UNLOCKED ─────── -->
+      <section id="viewUnlocked" class="view">
+        <div class="card card-unlocked">
+          <div class="card-row">
+            <span class="card-dim">Mode</span>
+            <span class="card-val card-val--green" id="dispMode">Ghost</span>
+          </div>
+          <div class="card-divider"></div>
+          <div class="card-row">
+            <span class="card-dim">Auto-relock in</span>
+            <span class="card-val card-val--amber mono" id="dispTimer">--:--</span>
+          </div>
+          <div class="ghost-indicator">
+            <span class="ghost-pulse"></span>
+            <span class="ghost-label">Ghost session active — cookie is invisible</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-relock" id="btnRelock">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          RE-LOCK NOW
+        </button>
+      </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- FEEDBACK TOAST -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="toast" class="toast hidden" role="alert" aria-live="assertive">
+      <span id="toastText"></span>
+      <button id="toastClose" class="toast-x" aria-label="Dismiss">&times;</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- WIPE CONFIRMATION MODAL -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="wipeOverlay" class="overlay hidden">
+      <div class="modal">
+        <h2 class="modal-head">⚠️ Destroy Vault</h2>
+        <p class="modal-body">This will <strong>permanently destroy</strong> your encrypted session cookie. This cannot be undone.</p>
+        <p class="modal-body">Type <code>WIPE</code> to confirm:</p>
+        <input type="text" id="wipeInput" class="modal-input" placeholder="Type WIPE" autocomplete="off" spellcheck="false">
+        <div class="modal-actions">
+          <button class="btn btn-ghost btn-sm" id="wipeCancel">Cancel</button>
+          <button class="btn btn-danger btn-sm" id="wipeConfirm" disabled>Destroy</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
