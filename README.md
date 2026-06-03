@@ -1,6 +1,6 @@
-# XT-Neros — Ghost Session Protocol
+# XT-Neros — Ghost Session Protocol: Roblox Cookie Security Chrome Extension
 
-> **Formerly XT-KRYPTOS v2** — A Manifest V3 Chrome extension that fundamentally alters the threat model of Roblox session cookies by decoupling authentication from browser storage.
+> **XT-Neros is a Manifest V3 Chrome extension for Roblox session cookie protection.** It removes the `.ROBLOSECURITY` cookie from the browser cookie jar and injects it at the network level — preventing malware, malicious extensions, and XSS payloads from stealing your Roblox authentication. Formerly XT-KRYPTOS v2. MIT licensed. Built for security-minded Roblox users who need session protection without sacrificing convenience.
 
 The `.ROBLOSECURITY` cookie is the master key to a Roblox account. Anyone who possesses it can authenticate as that user. Traditional cookie managers store it in the cookie jar — the same place malware, malicious extensions, and XSS payloads know to look.
 
