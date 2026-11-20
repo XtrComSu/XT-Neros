@@ -6,6 +6,8 @@ The `.ROBLOSECURITY` cookie is the master key to a Roblox account. Anyone who po
 
 XT-Neros removes it from the jar entirely. The cookie lives encrypted in a vault. When needed, it is injected directly into HTTP headers at the network level — never touching the cookie jar, never visible to any browser API, present only in the packets leaving your machine.
 
+[Architecture](#architecture--the-trust-hierarchy) · [Installation](#installation) · [Threat model & limitations](#threat-model) · [Latest release (v2.0.1)](https://github.com/XtrComSu/XT-Neros/releases/tag/v2.0.1) · [XtrCom Dossier](https://xtrcom.xyz/project/xt-neros)
+
 ---
 
 ## Architecture — The Trust Hierarchy
